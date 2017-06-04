@@ -24,21 +24,13 @@ class Member extends React.Component {
     this.back = this.back.bind(this);
   }
 
-  componentDidMount() {
-    const itemsRef = firebase.database().ref(`members/${this.props.match.params.memberId}`);
-    itemsRef.on('value', (snapshot) => {
-      let profile = snapshot.val();
-      console.log(profile);
-      // let body = [];
+  componentWillMount() {
+    this.firebaseRef = firebase.database().ref(`members/${this.props.match.params.memberId}`);
+  }
 
-      // for (let item in profile) {
-      //   if (item === 'name') {
-      //     this.setState({name: item})
-      //   }
-      //   if (item === body) {
-      //     this.setState({body: item})
-      //   }
-      // }
+  componentDidMount() {
+    this.firebaseRef.on('value', (snapshot) => {
+      let profile = snapshot.val();
       this.setState({
         name: profile.name,
         image: `./assets/members/${profile.name}.jpg`,
@@ -46,6 +38,10 @@ class Member extends React.Component {
         loaded: true,
       })
     });
+  }
+
+  componentWillUnmount() {
+    this.firebaseRef.off();
   }
 
   back(e) {
@@ -59,7 +55,7 @@ class Member extends React.Component {
       <div>
         <h1>Member profile</h1>
         <h2>{this.state.name}</h2>
-        {this.state.body.map(p => <p>{p}</p>)}
+        {this.state.body.map((p, i) => <p key={i.toString()}>{p}</p>)}
         <button type='button' onClick={this.back}>Close</button>
       </div>
       : <p>Loading...</p>
