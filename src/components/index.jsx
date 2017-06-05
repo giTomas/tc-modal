@@ -1,4 +1,5 @@
 
-import AppShell from './appShell';
+import AppShell from './appShell/';
+import Member from './member/'
 
-export { AppShell };
+export { AppShell, Member };

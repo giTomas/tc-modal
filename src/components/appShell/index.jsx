@@ -14,12 +14,13 @@ const Site = styled.div`
   flex-direction: column;
   font-family: 'Arimo', sans-serif;
   ${'' /* background-color: rgb(142, 230, 144); */}
+  position: relative
 `;
 
 const Main = styled.main`
   font-size: 1em;
   flex: 1;
-  margin: var(--vertical-rhytm);
+  margin: 4vmin;
 `;
 
 const Header = styled.header`
