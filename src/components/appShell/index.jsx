@@ -14,7 +14,8 @@ const Site = styled.div`
   flex-direction: column;
   font-family: 'Arimo', sans-serif;
   ${'' /* background-color: rgb(142, 230, 144); */}
-  position: relative
+  position: relative;
+  line-height: var(--line-height);
 `;
 
 const Main = styled.main`

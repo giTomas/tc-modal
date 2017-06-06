@@ -9,9 +9,10 @@ const ModalOverlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000
 `;
 
-const Modal= styled.div`
+const Modal = styled.div`
   width: 600px;
   max-width: 100%;
   position: fixed;
@@ -19,7 +20,19 @@ const Modal= styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: var(--vertical-rhytm)
+  padding: var(--vertical-rhytm);
+  height: 500px;
+  max-height: 100%;
+`;
+
+const ModalGuts = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px 50px 20px 20px;
+  overflow: hidden;
 `;
 
 class Member extends React.Component {
@@ -62,16 +75,19 @@ class Member extends React.Component {
 
   render() {
     return (
-      this.state.loaded ?
+
       <ModalOverlay>
+        this.state.loaded ?
         <Modal>
-          <h1>Member profile</h1>
-          <h2>{this.state.name}</h2>
-          {this.state.body.map((p, i) => <p key={i.toString()}>{p}</p>)}
-          <button type='button' onClick={this.back}>Close</button>
+          <ModalGuts>
+            <h1>{this.state.name}</h1>
+            {this.state.body.map((p, i) => <p key={i.toString()}>{p}</p>)}
+            <button type='button' onClick={this.back}>Close</button>
+          </ModalGuts>
         </Modal>
+        : <p>Loading...</p>
       </ModalOverlay>
-      : <p>Loading...</p>
+
     )
   }
 }
