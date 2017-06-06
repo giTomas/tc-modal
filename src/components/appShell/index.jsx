@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import * as Color from 'color';
 
-const backgroundColor = Color('rgb(81, 182, 11)');
+// const backgroundColor = Color('rgb(81, 182, 11)');
+const backgroundColor = Color('#A4BC00');
 
 const Site = styled.div`
   --line-height: 1.4;

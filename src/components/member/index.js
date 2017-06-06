@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import * as Color from 'color';
 import firebase from '../../config/firebase';
+
+const accentColor = Color('rgb(133, 87, 35)').lighten(0.4);
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -9,30 +12,47 @@ const ModalOverlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000
+  z-index: 50
 `;
 
 const Modal = styled.div`
-  width: 600px;
+  display: block;
+  width: 700px;
   max-width: 100%;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: var(--vertical-rhytm);
-  height: 500px;
+  ${'' /* padding: var(--vertical-rhytm); */}
+  height: 800px;
   max-height: 100%;
+  z-index: 100;
 `;
 
 const ModalGuts = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  padding: var(--vertical-rhytm);
   width: 100%;
   height: 100%;
-  padding: 20px 50px 20px 20px;
-  overflow: hidden;
+  overflow: auto;
+  ${'' /* columns: 2 200px; */}
+`;
+
+const CloseButton = styled.button`
+  font-size: 1em;
+  padding: 0.25em 1em;
+  border: 1px solid ${accentColor.string()};
+  border-radius: 3px;
+  color: ${accentColor.string()};
+  transition: color 0.25s ease-out,
+              background-color 0.25s ease-out;
+  &:hover {
+    background-color: ${accentColor.string()};
+    color: white;
+  }
 `;
 
 class Member extends React.Component {
@@ -77,15 +97,15 @@ class Member extends React.Component {
     return (
 
       <ModalOverlay>
-        this.state.loaded ?
+        { this.state.loaded &&
         <Modal>
-          <ModalGuts>
-            <h1>{this.state.name}</h1>
-            {this.state.body.map((p, i) => <p key={i.toString()}>{p}</p>)}
-            <button type='button' onClick={this.back}>Close</button>
-          </ModalGuts>
-        </Modal>
-        : <p>Loading...</p>
+            <ModalGuts>
+              <h1>{this.state.name}</h1>
+              {this.state.body.map((p, i) => <p key={i.toString()}>{p}</p>)}
+              <CloseButton type='button' onClick={this.back}>Close</CloseButton>
+            </ModalGuts>
+        </Modal> }
+
       </ModalOverlay>
 
     )
