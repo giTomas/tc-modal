@@ -42,8 +42,13 @@ const ModalGuts = styled.div`
 `;
 
 const CloseButton = styled.button`
+  ${'' /* width: var(--vertical-rhytm); */}
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: var(--vertical-rhytm);
   font-size: 1em;
-  padding: 0.25em 1em;
+  padding: 0.25em;
   border: 1px solid ${accentColor.string()};
   border-radius: 3px;
   color: ${accentColor.string()};
@@ -53,6 +58,17 @@ const CloseButton = styled.button`
     background-color: ${accentColor.string()};
     color: white;
   }
+`;
+
+const Paragraph = styled.p`
+  margin-bottom: var(--vertical-rhytm);
+  line-height: var(--line-height);
+`;
+
+const Name = styled.h2`
+  font-size: 1.33em;
+  margin-bottom: var(--vertical-rhytm);
+  line-height: var(--line-height);
 `;
 
 class Member extends React.Component {
@@ -100,9 +116,9 @@ class Member extends React.Component {
         { this.state.loaded &&
         <Modal>
             <ModalGuts>
-              <h1>{this.state.name}</h1>
-              {this.state.body.map((p, i) => <p key={i.toString()}>{p}</p>)}
-              <CloseButton type='button' onClick={this.back}>Close</CloseButton>
+              <Name>{this.state.name}</Name>
+              {this.state.body.map((p, i) => <Paragraph key={i.toString()}>{p}</Paragraph>)}
+              <CloseButton type='button' onClick={this.back}>X</CloseButton>
             </ModalGuts>
         </Modal> }
 
