@@ -1,3 +1,7 @@
+:root {
+	font-size: calc(1rem + (1.25 - 1) * ((100vw - 18.75em) / (75 - 18.75)))
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;

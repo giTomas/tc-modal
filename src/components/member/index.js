@@ -1,9 +1,28 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import * as Color from 'color';
 import firebase from '../../config/firebase';
 
 const accentColor = Color('rgb(133, 87, 35)').lighten(0.4);
+
+const showOverlay = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+// const slideModale = keyframes`
+//   from {
+//     transform: translate3d(-50px, 0px, 0px);
+//   }
+//   to {
+//     transform: translate3d(0px, 0px, 0px);
+//   }
+// `;
+
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -11,8 +30,9 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 50
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 50;
+  animation: ${showOverlay} linear 0.5s;
 `;
 
 const Modal = styled.div`
@@ -25,9 +45,10 @@ const Modal = styled.div`
   transform: translate(-50%, -50%);
   background-color: white;
   ${'' /* padding: var(--vertical-rhytm); */}
-  height: 800px;
+  height: 500px;
   max-height: 100%;
   z-index: 100;
+  ${'' /* animation: ${slideModale} ease-out 0.25s; */}
 `;
 
 const ModalGuts = styled.div`
@@ -51,6 +72,7 @@ const CloseButton = styled.button`
   padding: 0.25em;
   border: 1px solid ${accentColor.string()};
   border-radius: 3px;
+  z-index: 100;
   color: ${accentColor.string()};
   transition: color 0.25s ease-out,
               background-color 0.25s ease-out;
@@ -61,6 +83,7 @@ const CloseButton = styled.button`
 `;
 
 const Paragraph = styled.p`
+  font-size: 1em;
   margin-bottom: var(--vertical-rhytm);
   line-height: var(--line-height);
 `;
@@ -111,7 +134,6 @@ class Member extends React.Component {
 
   render() {
     return (
-
       <ModalOverlay>
         { this.state.loaded &&
         <Modal>
@@ -121,7 +143,6 @@ class Member extends React.Component {
               <CloseButton type='button' onClick={this.back}>X</CloseButton>
             </ModalGuts>
         </Modal> }
-
       </ModalOverlay>
 
     )

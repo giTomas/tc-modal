@@ -2,21 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import * as Color from 'color';
 
-// const backgroundColor = Color('rgb(81, 182, 11)');
-const backgroundColor = Color('#A4BC00');
+const backgroundColor = Color('rgb(81, 182, 11)');
 
 const Site = styled.div`
   --line-height: 1.4;
-  --base-font-size: calc(1rem + (1.25 - 1) * ((100vw - 18.75em) / (75 - 18.75)));
-  --vertical-rhytm: calc(var(--base-font-size) * var(--line-height));
-  font-size: var(--base-font-size);
+  ${'' /* --base-font-size: calc(1rem + (1.15 - 1) * ((100vw - 18.75em) / (75 - 18.75))); */}
+  --vertical-rhytm: calc(1rem * var(--line-height));
+  ${'' /* --vertical-rhytm: calc(var(--base-font-size) * var(--line-height)); */}
+  ${'' /* font-size: var(--base-font-size); */}
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   font-family: 'Arimo', sans-serif;
   ${'' /* background-color: rgb(142, 230, 144); */}
   position: relative;
-  line-height: var(--line-height);
+  line-height: var(--line-height)
 `;
 
 const Main = styled.main`
