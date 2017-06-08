@@ -5,7 +5,7 @@ import {
   Switch,
   BrowserRouter as Router,
 } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import firebase from './config/firebase'
 import * as Color from 'color';
 import { AppShell, Member } from './components/';
@@ -42,7 +42,6 @@ class Section extends React.Component{
     super(props);
 
     this.state = {
-      // article: null,
       articles: [],
       loaded: false
     }
@@ -92,6 +91,31 @@ class Section extends React.Component{
   }
 }
 
+const show = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const Wrapper = styled.div`
+  animation: ${show} ease-out 0.5s;
+  margin-top: calc(var(--vertical-rhytm)*4)
+`;
+const ArticleParagraph = styled.p`
+  margin-bottom: var(--vertical-rhytm);
+`;
+const ArticleSubtitle = styled.h3`
+  font-size: 1.33em;
+  ${'' /* margin: var(--vertical-rhytm) 0; */}
+`;
+const Body = styled.article`
+  margin: calc(var(--vertical-rhytm)*2) auto;
+  max-width: 700px;
+`;
+
 class Article extends React.Component{
   constructor(props) {
     super(props);
@@ -122,19 +146,19 @@ class Article extends React.Component{
   render() {
     return (
           this.state.loaded ?
-          <div>
+          <Wrapper>
             <h1>{this.state.article.title}</h1>
             <StyledLink to={`/members/${this.state.article.authorId}`}>
               {this.state.article.author}
             </StyledLink>
-            <div>
-              {this.state.article.body.map(item =>
+            <Body>
+              {this.state.article.body.map((item, i) =>
                   Object.keys(item)[0] === 'p' ?
-                  <p>{item.p}</p> :
-                  <h3>{item.h}</h3>)
+                  <ArticleParagraph key={`${i}`}>{item.p}</ArticleParagraph> :
+                  <ArticleSubtitle key={`${i}`}>{item.h}</ArticleSubtitle>)
               }
-            </div>
-          </div> :
+            </Body>
+          </Wrapper> :
           <p>Loading...</p>
     )
   }
