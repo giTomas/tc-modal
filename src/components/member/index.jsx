@@ -6,22 +6,38 @@ import firebase from '../../config/firebase';
 const accentColor = Color('rgb(133, 87, 35)').lighten(0.4);
 
 const showOverlay = keyframes`
-  from {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  75% {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
+`;
+
+const showModale = keyframes`
+  0% {
     opacity: 0;
   }
-  to {
+  5% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
   }
 `;
 
-// const slideModale = keyframes`
-//   from {
-//     transform: translate3d(-50px, 0px, 0px);
-//   }
-//   to {
-//     transform: translate3d(0px, 0px, 0px);
-//   }
-// `;
+const slideModale = keyframes`
+  0% {
+    ${'' /* transform: translate3d(-50px, 0px, 0px); */}
+    margin-left: -15vmin;
+  }
+  100$ {
+    margin-left: 0px;
+  }
+`;
 
 
 const ModalOverlay = styled.div`
@@ -39,16 +55,17 @@ const Modal = styled.div`
   display: block;
   width: 700px;
   max-width: 100%;
+  ${'' /* max-height: 100vh; */}
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
   ${'' /* padding: var(--vertical-rhytm); */}
   height: 500px;
   max-height: 100%;
   z-index: 100;
-  ${'' /* animation: ${slideModale} ease-out 0.25s; */}
+  animation: ${slideModale} cubic-bezier(0.3,-0.07, 0.62, 1.14) 0.25s;
+  ${'' /* background-color: white; */}
 `;
 
 const ModalGuts = styled.div`
@@ -58,7 +75,10 @@ const ModalGuts = styled.div`
   padding: var(--vertical-rhytm);
   width: 100%;
   height: 100%;
+  ${'' /* max-height: 100vh; */}
   overflow: auto;
+  background-color: white;
+  animation: ${showModale} linear 0.4s;
   ${'' /* columns: 2 200px; */}
 `;
 
