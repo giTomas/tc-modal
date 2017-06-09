@@ -5,7 +5,7 @@ import * as Color from 'color';
 const backgroundColor = Color('rgb(81, 182, 11)');
 
 const Site = styled.div`
-  --line-height: 1.4;
+  --line-height: 1.55;
   ${'' /* --base-font-size: calc(1rem + (1.15 - 1) * ((100vw - 18.75em) / (75 - 18.75))); */}
   --vertical-rhytm: calc(1rem * var(--line-height));
   ${'' /* --vertical-rhytm: calc(var(--base-font-size) * var(--line-height)); */}

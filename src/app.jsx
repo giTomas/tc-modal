@@ -106,9 +106,11 @@ const Wrapper = styled.div`
 `;
 const ArticleParagraph = styled.p`
   margin-bottom: var(--vertical-rhytm);
+  font-family: 'Libre Baskerville', serif;
 `;
 const ArticleSubtitle = styled.h3`
   font-size: 1.33em;
+  font-family: 'Arimo', sans-serif;
   ${'' /* margin: var(--vertical-rhytm) 0; */}
 `;
 const Body = styled.article`
